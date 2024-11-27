@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string("name");
             $table->string("description")->nullable();
             $table->string("group")->nullable();
+            $table->boolean("default")->default(0);
 
             $table->timestamps();
         });

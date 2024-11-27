@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use App\Services\Traits\CanPermissionTrait;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -14,9 +15,12 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
+    use CanPermissionTrait;
+
     protected static ?string $model           = User::class;
     protected static ?string $navigationIcon  = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Configurações';
@@ -35,6 +39,9 @@ class UserResource extends Resource
                          ->required()
                          ->email(),
                 TextInput::make('password')
+                         ->dehydrateStateUsing(fn(string $state): string => Hash::make($state))
+                         ->dehydrated(fn(?string $state): bool => filled($state))
+                         ->required(fn(string $operation): bool => $operation === 'create')
                          ->password(),
                 Select::make('roles')
                       ->relationship('roles', 'name')

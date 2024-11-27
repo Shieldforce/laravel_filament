@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
@@ -9,29 +10,33 @@ class RoleSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = [
+        $roles = [
             [
                 'name'        => "Admin",
                 "description" => "Admin do Sistema",
                 "active"      => 1,
                 "system"      => 1,
+                "permissions" => []
             ],
             [
                 'name'        => "User",
                 "description" => "Usuário do Sistema",
                 "active"      => 1,
                 "system"      => 1,
+                "permissions" => Permission::where("default", 1)->pluck("id")->toArray()
             ],
         ];
 
-        foreach ($users as $user) {
-            Role::updateOrCreate([
-                'name' => $user["name"],
+        foreach ($roles as $role) {
+            $roleCreate = Role::updateOrCreate([
+                'name' => $role["name"],
             ], [
-                "description" => $user["description"],
-                "active"      => $user["active"],
-                "system"      => $user["system"],
+                "description" => $role["description"],
+                "active"      => $role["active"],
+                "system"      => $role["system"],
             ]);
+
+            $roleCreate->permissions()->sync($role["permissions"] ?? []);
         }
     }
 }

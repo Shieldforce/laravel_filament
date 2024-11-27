@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RoleResource\Pages;
 use App\Models\Role;
+use App\Services\Traits\CanPermissionTrait;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleResource extends Resource
 {
+    use CanPermissionTrait;
+
     protected static ?string $model           = Role::class;
     protected static ?string $navigationIcon  = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Configurações';
