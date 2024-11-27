@@ -29,7 +29,7 @@ class RoleResource extends Resource
 
     public static function canView(Model $record): bool
     {
-        if(
+        if (
             Auth::check() &&
             in_array("Admin", Auth::user()->roles->pluck("name")->toArray())
         ) {
@@ -41,7 +41,7 @@ class RoleResource extends Resource
 
     public static function canViewAny(): bool
     {
-        if(
+        if (
             Auth::check() &&
             in_array("Admin", Auth::user()->roles->pluck("name")->toArray())
         ) {
@@ -53,7 +53,7 @@ class RoleResource extends Resource
 
     public static function canCreate(): bool
     {
-        if(
+        if (
             Auth::check() &&
             in_array("Admin", Auth::user()->roles->pluck("name")->toArray())
         ) {
@@ -126,6 +126,7 @@ class RoleResource extends Resource
             'index'  => Pages\ListRoles::route('/'),
             'create' => Pages\CreateRole::route('/create'),
             'edit'   => Pages\EditRole::route('/{record}/edit'),
+            'delete' => Pages\DeleteRole::route('/{record}/delete'),
         ];
     }
 }

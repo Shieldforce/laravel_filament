@@ -78,6 +78,7 @@ class UserResource extends Resource
             'index'  => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit'   => Pages\EditUser::route('/{record}/edit'),
+            'delete' => Pages\DeleteUser::route('/{record}/delete'),
         ];
     }
 }
