@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::observe(UserObserver::class);
+    }
 
     protected $fillable = [
         'name',
@@ -48,7 +56,7 @@ class User extends Authenticatable
      * ACL
      */
 
-    public function hasAnyRoles($roles) : bool
+    public function hasAnyRoles($roles): bool
     {
         if (is_object($roles)) {
             return !!$roles->intersect($this->roles)->count();
