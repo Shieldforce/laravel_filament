@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected static function boot()
     {
         parent::boot();
