@@ -32,8 +32,6 @@ class AuthServiceProvider extends ServiceProvider
 
             if (isset($tenant->domain)) {
                 Config::set("APP_URL", $tenant->domain);
-
-                //dd(env('APP_URL'));
             }
 
             if ($user->hasAnyRoles('Admin')) {

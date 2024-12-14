@@ -15,12 +15,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PostResource extends Resource
 {
-    protected static ?string $model           = Post::class;
-    protected static ?string $navigationLabel = "Artigos";
-    protected static ?string $label           = "Artigo";
-    protected static ?string $pluralLabel     = "Artigos";
-    protected static ?string $slug            = "posts";
-    protected static ?string $navigationIcon  = 'heroicon-o-rectangle-stack';
+    protected static ?string $model            = Post::class;
+    protected static ?string $navigationLabel  = "Artigos";
+    protected static ?string $label            = "Artigo";
+    protected static ?string $pluralLabel      = "Artigos";
+    protected static ?string $slug             = "posts";
+    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
+    protected static bool    $isScopedToTenant = false;
 
     public static function form(Form $form): Form
     {

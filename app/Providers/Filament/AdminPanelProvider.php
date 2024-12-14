@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\EditarPerfil;
+use App\Filament\Pages\EditPerfil;
 use App\Filament\Pages\Tenancy\EditCorporateProfile;
 use App\Filament\Pages\Tenancy\RegisterCorporate;
 use App\Models\Corporate;
@@ -41,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->databaseNotifications()
             ->databaseNotificationsPolling("5s")
+            ->profile(EditPerfil::class)
             ->colors([
                 'primary' => Color::Amber,
             ])

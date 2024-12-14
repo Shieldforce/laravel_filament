@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Observers\UserObserver;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasDefaultTenant;
+use Filament\Models\Contracts\HasName;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 
-class User extends Authenticatable implements FilamentUser, HasTenants, HasDefaultTenant
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, HasDefaultTenant, HasTenants
 {
     use HasFactory, Notifiable;
 
@@ -32,6 +34,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasDefau
         'email',
         'password',
         'system',
+        "avatar_url",
         "corporate_latest_id",
     ];
 
@@ -46,6 +49,20 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasDefau
             'email_verified_at' => 'datetime',
             'password'          => 'hashed',
         ];
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        if ($this->avatar_url) {
+            return asset('storage/' . $this->avatar_url);
+        } /*else {
+            return asset('img/avatar-default.png');
+        }*/
+    }
+
+    public function getFilamentName(): string
+    {
+        return $this->name;
     }
 
     public function roles(): BelongsToMany

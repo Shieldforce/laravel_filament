@@ -23,13 +23,14 @@ class RoleResource extends Resource
 {
     use CanPermissionTrait;
 
-    protected static ?string $model           = Role::class;
-    protected static ?string $navigationIcon  = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Configurações';
-    protected static ?string $slug            = 'roles';
-    protected static ?string $label           = "Função";
-    protected static ?string $pluralLabel     = "Funções";
-    protected static ?string $navigationLabel = "Funções";
+    protected static ?string $model            = Role::class;
+    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup  = 'Configurações';
+    protected static ?string $slug             = 'roles';
+    protected static ?string $label            = "Função";
+    protected static ?string $pluralLabel      = "Funções";
+    protected static ?string $navigationLabel  = "Funções";
+    protected static bool    $isScopedToTenant = false;
 
     public static function canView(Model $record): bool
     {

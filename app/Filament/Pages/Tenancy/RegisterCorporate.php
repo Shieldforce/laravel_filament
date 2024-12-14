@@ -4,7 +4,6 @@ namespace App\Filament\Pages\Tenancy;
 
 use App\Filament\Resources\CorporateResource;
 use App\Models\Corporate;
-use App\Models\Role;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
