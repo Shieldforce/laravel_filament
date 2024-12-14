@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Illuminate\Database\Eloquent\Model;
 
-class Corporate extends Model implements HasCurrentTenantLabel
+class Corporate extends Model implements HasAvatar, HasCurrentTenantLabel
 {
     protected $table    = 'corporates';
 
@@ -16,6 +17,7 @@ class Corporate extends Model implements HasCurrentTenantLabel
         "phone",
         "slug",
         "domain",
+        "avatar_url",
     ];
 
     public function getCurrentTenantLabel(): string
@@ -35,12 +37,21 @@ class Corporate extends Model implements HasCurrentTenantLabel
         ]);
     }
 
-    public function usersLogin()
+    public function latestsUsers()
     {
         return $this->hasMany(
             User::class,
             "corporate_latest_id",
             "id"
         );
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        if ($this->avatar_url) {
+            return asset('storage/' . $this->avatar_url);
+        } /*else {
+            return asset('img/logo-default.png');
+        }*/
     }
 }

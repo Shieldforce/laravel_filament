@@ -11,18 +11,22 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'     => "SA",
-                'email'    => "admin@admin.com",
-                'password' => bcrypt(env("ADMIN_SEEDER_PASSWORD")),
-                "system"   => 1,
-                "roles"    => [1]
+                'name'                => "SA",
+                'email'               => "admin@admin.com",
+                'password'            => bcrypt(env("ADMIN_SEEDER_PASSWORD")),
+                "system"              => 1,
+                "roles"               => [1],
+                "corporates"          => [1, 2],
+                "corporate_latest_id" => 1
             ],
             [
-                'name'     => "User",
-                'email'    => "user@user.com",
-                'password' => bcrypt(env("ADMIN_SEEDER_PASSWORD")),
-                "system"   => 1,
-                "roles"    => [2]
+                'name'                => "User",
+                'email'               => "user@user.com",
+                'password'            => bcrypt(env("ADMIN_SEEDER_PASSWORD")),
+                "system"              => 1,
+                "roles"               => [2],
+                "corporates"          => [1],
+                "corporate_latest_id" => 2,
             ],
         ];
 
@@ -31,11 +35,13 @@ class UserSeeder extends Seeder
                 'name'  => $user["name"],
                 'email' => $user["email"],
             ], [
-                'password' => $user["password"],
-                'system'   => $user["system"],
+                'password'            => $user["password"],
+                'system'              => $user["system"],
+                "corporate_latest_id" => $user["corporate_latest_id"]
             ]);
 
             $userCreate->roles()->sync($user["roles"]);
+            $userCreate->corporates()->sync($user["corporates"]);
         }
     }
 }

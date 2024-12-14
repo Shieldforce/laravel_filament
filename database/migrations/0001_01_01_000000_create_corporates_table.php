@@ -13,10 +13,11 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('document');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('slug');
-            $table->string('domain');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('avatar_url')->nullable();
 
             $table->timestamps();
         });

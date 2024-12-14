@@ -32,7 +32,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasDefau
         'email',
         'password',
         'system',
-        "corporate_login_id",
+        "corporate_latest_id",
     ];
 
     protected $hidden = [

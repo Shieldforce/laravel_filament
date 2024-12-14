@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Register;
+use App\Filament\Pages\Tenancy\EditCorporateProfile;
+use App\Filament\Pages\Tenancy\RegisterCorporate;
 use App\Models\Corporate;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -30,7 +33,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->tenant(Corporate::class, slugAttribute: 'domain')
             ->tenantDomain('{tenant:domain}')
-            //->tenantRegistration("admin.register")
+            ->registration(Register::class)
+            ->tenantRegistration(RegisterCorporate::class)
+            ->tenantProfile(EditCorporateProfile::class)
+            ->passwordReset()
             ->darkMode(false)
             ->login()
             ->databaseNotifications()
