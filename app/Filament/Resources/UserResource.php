@@ -21,13 +21,15 @@ class UserResource extends Resource
 {
     use CanPermissionTrait;
 
-    protected static ?string $model           = User::class;
-    protected static ?string $navigationIcon  = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Configurações';
-    protected static ?string $slug            = 'users';
-    protected static ?string $label           = "Usuário";
-    protected static ?string $pluralLabel     = "Usuários";
-    protected static ?string $navigationLabel = "Usuários";
+    protected static ?string $model                           = User::class;
+    protected static ?string $navigationIcon                  = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup                 = 'Configurações';
+    protected static ?string $slug                            = 'users';
+    protected static ?string $label                           = "Usuário";
+    protected static ?string $pluralLabel                     = "Usuários";
+    protected static ?string $navigationLabel                 = "Usuários";
+    protected static ?string $tenantOwnershipRelationshipName = 'users';
+    protected static ?string $tenantRelationshipName          = 'corporates';
 
     public static function form(Form $form): Form
     {

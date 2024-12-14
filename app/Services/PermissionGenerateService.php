@@ -65,17 +65,17 @@ class PermissionGenerateService
     protected function translate(string $routeName)
     {
         $separate = explode(".", $routeName);
-        $entity   = $separate[3];
+        $entity   = $separate[3] ?? null;
 
-        if (str_contains($separate[3], "users")) {
+        if (str_contains($entity, "users")) {
             $entity = "Usuários";
         }
 
-        if (str_contains($separate[3], "roles")) {
+        if (str_contains($entity, "roles")) {
             $entity = "Funções";
         }
 
-        if (str_contains($separate[3], "permissions")) {
+        if (str_contains($entity, "permissions")) {
             $entity = "Permissões";
         }
 
